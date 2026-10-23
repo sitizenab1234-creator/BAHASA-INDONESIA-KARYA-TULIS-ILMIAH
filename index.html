@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ekspedisi Naskah Emas – Gim Edukasi Karya Tulis Ilmiah</title>
+<style>
+:root{--bg:#f4efe3;--card:#fffaf0;--ink:#2a2118;--mut:#6b5d4a;--pri:#1f6f5c;--on:#fff;--acc:#c8812a;--ok:#2e8b57;--bad:#c0392b;--bd:#dccfb4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130d;--card:#221c13;--ink:#f1e8d6;--mut:#b7a98f;--pri:#4fc3a1;--on:#10261f;--acc:#e8a550;--ok:#58c98a;--bad:#ef6f61;--bd:#3a3023}}
+:root[data-theme="dark"]{--bg:#17130d;--card:#221c13;--ink:#f1e8d6;--mut:#b7a98f;--pri:#4fc3a1;--on:#10261f;--acc:#e8a550;--ok:#58c98a;--bad:#ef6f61;--bd:#3a3023}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:.2em 0}
+main{max-width:860px;margin:0 auto;padding:16px}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.top h1{font-size:1.45rem}
+.stat{display:flex;gap:10px;font-weight:600;background:var(--card);border:1px solid var(--bd);border-radius:999px;padding:4px 14px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{flex:1;padding:9px;border:1px solid var(--bd);background:var(--card);color:var(--ink);border-radius:10px;font-weight:600;cursor:pointer}
+.tabs button.on{background:var(--pri);color:var(--on);border-color:var(--pri)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:12px}
+.story{border-left:5px solid var(--acc)}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.node{display:flex;flex-direction:column;gap:2px;text-align:left;padding:12px;border:2px solid var(--bd);border-radius:14px;background:var(--card);color:var(--ink);cursor:pointer;font:inherit}
+.node .ic{font-size:1.8rem}.node small{color:var(--mut)}
+.node:hover:not(:disabled){border-color:var(--pri)}
+.node.done{border-color:var(--ok)}.node.boss{border-color:var(--acc)}
+.node:disabled{opacity:.5;cursor:not-allowed}
+.go{display:block;width:100%;margin-top:12px;padding:12px;border:0;border-radius:10px;background:var(--pri);color:var(--on);font-weight:700;font-size:1rem;cursor:pointer}
+.go.alt{background:var(--card);color:var(--ink);border:1px solid var(--bd)}
+.hd{display:flex;justify-content:space-between;font-weight:600;color:var(--mut)}
+.hp{height:12px;background:var(--bd);border-radius:9px;overflow:hidden;margin:8px 0}.hp i{display:block;height:100%;background:var(--bad);transition:width .4s}
+.tg{display:inline-block;font-size:.78rem;background:var(--acc);color:#fff;border-radius:6px;padding:1px 8px;margin:8px 0 2px}
+.q{font-size:1.08rem;font-weight:600;margin:6px 0 10px}
+blockquote{margin:6px 0;padding:10px 12px;background:var(--bg);border-left:4px solid var(--pri);border-radius:6px;font-size:.95rem}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border:2px solid var(--bd);background:var(--bg);color:var(--ink);border-radius:10px;font:inherit;cursor:pointer}
+.opt.on{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 15%,var(--bg))}
+.row{display:flex;gap:8px}.row .opt{text-align:center}
+.bks{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:8px}
+.bk{min-height:90px;border:2px dashed var(--pri);border-radius:10px;padding:6px}.bk h4{margin:0 0 4px;font-size:.85rem;color:var(--pri)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;min-height:40px;padding:6px;border:1px solid var(--bd);border-radius:10px}
+.chip{display:inline-block;margin:2px;padding:5px 10px;background:var(--acc);color:#fff;border-radius:999px;font-size:.88rem;cursor:grab;user-select:none}
+.chip.on{outline:3px solid var(--ink)}
+.mt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;margin:8px 0}.mt span{font-weight:600;min-width:130px}
+select{flex:1;min-width:200px;max-width:100%;padding:8px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--ink);font:inherit}
+.od{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg)}
+.od button{border:1px solid var(--bd);background:var(--card);color:var(--ink);border-radius:6px;padding:4px 10px;cursor:pointer}
+.fb{margin-top:12px;padding:10px 12px;border-radius:10px;border:2px solid}.fb.ok{border-color:var(--ok)}.fb.bad{border-color:var(--bad)}
+.big{font-size:3rem;text-align:center}
+.hide{display:none!important}
+table{border-collapse:collapse;width:100%;font-size:.93rem}td,th{border:1px solid var(--bd);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--bg)}
+details{margin:6px 0}summary{cursor:pointer;font-weight:600}
+li{margin:3px 0}
+</style></head><body><main>
+<div class="top"><h1>🗺️ Ekspedisi Naskah Emas</h1><div class="stat"><span>⭐ <span id="pts">0</span> poin</span><span id="badges"></span></div></div>
+<div class="tabs"><button id="t1" class="on" onclick="tab(1)">🎮 Main Gim</button><button id="t2" onclick="tab(2)">📋 Panduan Guru</button></div>
+
+<section id="game">
+<div id="home">
+<div class="card story"><h2>Narasi Petualangan</h2>
+<p>Naskah Emas, kumpulan penelitian terbaik Nusantara, dicuri oleh <b>Si Plagiator Bayangan</b> lalu dipecah menjadi empat bagian dan disembunyikan di Pulau Ilmiah. Hanya <b>Peneliti Muda</b> yang menguasai karya tulis ilmiah yang mampu merebutnya kembali. Taklukkan tiga zona, kumpulkan lencana, lalu hadapi Boss di Benteng Kritik!</p></div>
+<div class="card"><h3>Peta Pulau Ilmiah</h3><div class="map" id="map"></div></div>
+<div class="card hide" id="info"></div>
+</div>
+<div id="quiz" class="card hide"></div>
+<div id="res" class="card hide"></div>
+</section>
+
+<section id="guru" class="hide">
+<div class="card"><h2>Panduan Guru</h2>
+<p><b>Mapel:</b> Bahasa Indonesia · <b>Fase F / Kelas XI</b> · <b>Materi:</b> Karya Tulis Ilmiah · <b>Durasi:</b> 45 menit (1 pertemuan)</p>
+<p><b>Tujuan pembelajaran:</b> peserta didik mampu (1) mengidentifikasi ciri dan ragam bahasa karya tulis ilmiah, (2) menentukan sistematika dan rumusan masalah, (3) menerapkan kutipan, parafrase, dan daftar pustaka secara etis, dan (4) menganalisis serta merevisi paragraf ilmiah.</p></div>
+<div class="card"><h3>Alur 45 Menit</h3><table>
+<tr><th>Menit</th><th>Kegiatan</th></tr>
+<tr><td>0–5</td><td>Pembukaan: bacakan narasi, bentuk tim 4–5 siswa (atau individu), jelaskan aturan.</td></tr>
+<tr><td>5–13</td><td>Zona 1 Rimba Gagasan (PG + Benar/Salah)</td></tr>
+<tr><td>13–22</td><td>Zona 2 Lembah Struktur (PGK + Drag and Drop + Benar/Salah)</td></tr>
+<tr><td>22–31</td><td>Zona 3 Pelabuhan Sitasi (Menjodohkan + Mengurutkan + PG)</td></tr>
+<tr><td>31–41</td><td>Boss Battle Benteng Kritik (HOTS: PG, PGK, Drag and Drop)</td></tr>
+<tr><td>41–45</td><td>Refleksi dan penguatan konsep</td></tr></table></div>
+<div class="card"><h3>Aturan Pergerakan &amp; Syarat Kelulusan Zona</h3><ul>
+<li>Zona dibuka berurutan 1 → 2 → 3 → Boss. Zona berikutnya terkunci sebelum zona sebelumnya lulus.</li>
+<li><b>Lulus zona</b> bila menjawab benar minimal 60% soal (2 dari 3 soal). Jika belum lulus, zona diulang (urutan opsi menjodohkan dan mengurutkan diacak ulang).</li>
+<li>Poin: 10 per soal benar + 20 bonus saat lulus zona (poin zona hanya dihitung pada kelulusan pertama). Maksimum 200 poin.</li>
+<li>Lencana: 🧭 Pemburu Gagasan, 📐 Arsitek Naskah, 📚 Penjaga Sitasi, 👑 Cendekia Nusantara.</li>
+<li>Boss: setiap jawaban benar mengurangi nyawa Boss; Boss kalah bila minimal 2 dari 3 serangan (soal) tepat.</li>
+<li>Peringkat akhir: ≥180 Cendekia Nusantara · 140–179 Peneliti Muda · &lt;140 Penulis Pemula.</li></ul></div>
+<div class="card"><h3>Saran Pelaksanaan</h3><ul>
+<li><b>Mode tim:</b> satu perangkat per tim atau proyeksikan layar; tim berdiskusi 30 detik sebelum menjawab.</li>
+<li><b>Diferensiasi:</b> tim yang cepat menulis satu paragraf revisi bebas sebagai misi bonus; tim yang butuh bantuan mendapat petunjuk lisan.</li>
+<li><b>Pertanyaan refleksi:</b> (1) Bagian mana yang paling sulit dibedakan, fakta atau opini? (2) Mengapa sumber harus selalu disebut? (3) Bagaimana kamu memastikan tulisanmu bebas plagiarisme?</li>
+<li><b>Penilaian formatif:</b> catat zona yang paling sering diulang untuk bahan penguatan pertemuan berikutnya.</li></ul></div>
+<div class="card"><h3>Bank Soal &amp; Kunci Jawaban</h3><div id="key"></div></div>
+</section></main>
+<script>
+const L='ABCDE',TN={pg:'Pilihan Ganda',pgk:'Pilihan Ganda Kompleks',tf:'Benar / Salah',dd:'Drag and Drop',match:'Menjodohkan',order:'Mengurutkan'};
+const BP='(1) Di SMA Nusa Bangsa, siswa kelas XI yang mengikuti program membaca 15 menit setiap pagi memiliki rata-rata nilai literasi 78, sedangkan siswa yang tidak mengikuti program memiliki rata-rata 64 (Dinas Pendidikan, 2025). (2) Jadi, program membaca pasti membuat semua siswa menjadi pintar. (3) Gue yakin sekolah lain juga bakal sukses kalau meniru. (4) Oleh karena itu, perlu penelitian lanjutan dengan sampel lebih luas untuk menguji efektivitas program tersebut.';
+const Z=[
+{n:'Rimba Gagasan',ic:'🌴',tema:'Ciri & ragam bahasa ilmiah',rw:'Lencana Pemburu Gagasan',bd:'🧭',misi:'Mengenali ciri karya tulis ilmiah (objektif, sistematis, berdasar sumber) dan membedakan ragam bahasa ilmiah dari ragam populer.',qs:[
+{t:'pg',q:'Kalimat manakah yang sesuai dengan ragam bahasa karya tulis ilmiah?',o:['Gue rasa banyak banget siswa yang males baca.','Hasil survei menunjukkan bahwa 62% siswa membaca buku nonpelajaran kurang dari satu jam per hari.','Pokoknya literasi kita parah banget deh!','Mungkin sih kayaknya siswa kurang suka membaca.'],a:1,e:'KTI memakai bahasa baku, lugas, objektif, dan didukung data. Pilihan lain tidak baku atau spekulatif.'},
+{t:'pg',q:'Ciri utama yang membedakan karya tulis ilmiah dari karangan populer adalah ….',o:['Gaya bahasa emosional penuh majas','Disusun objektif, sistematis, dan berdasarkan data atau sumber yang dapat diverifikasi','Mengutamakan opini pribadi penulis','Bertujuan utama menghibur pembaca'],a:1,e:'Keilmiahan terletak pada objektivitas, sistematika, dan kebenaran yang dapat diverifikasi.'},
+{t:'tf',q:'Kalimat “Banyak ahli mengatakan bahwa membaca itu bermanfaat” sudah memenuhi syarat ilmiah walaupun tidak menyebut sumbernya.',a:false,e:'Klaim ilmiah harus menyebut sumber atau ahli yang jelas agar dapat diverifikasi.'}]},
+{n:'Lembah Struktur',ic:'⛰️',tema:'Struktur & kerangka KTI',rw:'Lencana Arsitek Naskah',bd:'📐',misi:'Mengklasifikasikan bagian-bagian KTI (awal, isi, akhir) dan memahami unsur pendahuluan serta rumusan masalah.',qs:[
+{t:'pgk',q:'Pilih SEMUA unsur yang lazim terdapat pada bagian pendahuluan karya tulis ilmiah.',o:['Latar belakang masalah','Rumusan masalah','Tujuan penelitian','Daftar pustaka','Lampiran data mentah'],a:[0,1,2],e:'Daftar pustaka dan lampiran berada di bagian akhir, bukan pendahuluan.'},
+{t:'dd',q:'Seret (atau ketuk lalu ketuk kotak tujuan) setiap bagian ke posisinya dalam sistematika KTI.',z:['Bagian awal','Bagian isi','Bagian akhir'],it:['Halaman judul','Kata pengantar','Metode penelitian','Pembahasan','Daftar pustaka','Lampiran'],a:[0,0,1,1,2,2],e:'Awal: halaman judul dan kata pengantar. Isi: metode dan pembahasan. Akhir: daftar pustaka dan lampiran.'},
+{t:'tf',q:'Rumusan masalah sebaiknya berupa pertanyaan yang spesifik dan dapat dijawab melalui penelitian.',a:true,e:'Rumusan masalah yang jelas mengarahkan metode, data, dan simpulan.'}]},
+{n:'Pelabuhan Sitasi',ic:'⚓',tema:'Kutipan, rujukan & etika',rw:'Lencana Penjaga Sitasi',bd:'📚',misi:'Menerapkan kutipan, parafrase, daftar pustaka, dan langkah penyusunan secara etis (anti plagiarisme).',qs:[
+{t:'match',q:'Jodohkan istilah dengan pengertiannya.',l:['Plagiarisme','Parafrase','Kutipan langsung','Daftar pustaka'],r:['Mengambil karya atau gagasan orang lain tanpa menyebut sumber','Menyatakan kembali isi sumber dengan kata-kata sendiri tanpa mengubah makna','Menyalin kata asli sumber dan memberinya tanda petik','Daftar sumber yang benar-benar dirujuk dalam tulisan'],e:'Bedakan kutipan (kata asli), parafrase (kata sendiri), dan plagiarisme (tanpa sumber).'},
+{t:'order',q:'Urutkan langkah menyusun karya tulis ilmiah dari yang pertama.',it:['Menentukan topik dan rumusan masalah','Mengumpulkan data dan sumber rujukan','Menyusun kerangka tulisan','Menulis draf','Menyunting dan memeriksa kutipan serta daftar pustaka'],e:'Alur umum: topik, data, kerangka, draf, penyuntingan.'},
+{t:'pg',q:'Manakah kalimat yang merupakan kutipan tidak langsung bergaya ilmiah?',o:['Rahman (2021) menyatakan bahwa minat baca siswa meningkat setelah adanya program literasi sekolah.','Rahman berkata, “Minat baca siswa meningkat sekali.”','Katanya, minat baca siswa lagi naik daun nih.','Minat baca siswa meningkat tanpa penjelasan sumber.'],a:0,e:'Kutipan tidak langsung memakai kata penulis sendiri, tanpa tanda petik, dan tetap menyebut sumber.'}]},
+{n:'Benteng Kritik',ic:'🏰',tema:'Boss Battle HOTS',rw:'Mahkota Cendekia Nusantara',bd:'👑',misi:'Menganalisis kelemahan penalaran dan merevisi paragraf ilmiah yang bermasalah untuk mengalahkan Si Plagiator Bayangan.',qs:[
+{t:'pg',p:BP,q:'Kelemahan penalaran yang paling tepat pada paragraf di atas adalah ….',o:['Kalimat (1) tidak menyebut sumber data','Kalimat (2) menggeneralisasi berlebihan: perbedaan dua kelompok dinyatakan sebagai sebab pasti bagi semua siswa','Kalimat (4) terlalu panjang sehingga membingungkan','Seluruh kalimat terlalu ilmiah'],a:1,e:'Data hanya menunjukkan perbedaan rata-rata, bukan bukti sebab-akibat mutlak untuk semua siswa.'},
+{t:'pgk',p:BP,q:'Pilih SEMUA perbaikan yang tepat agar paragraf layak menjadi bagian KTI.',o:['Ubah kalimat (2) menjadi “Program membaca diduga berkontribusi pada peningkatan nilai literasi siswa.”','Hapus kata “gue” dan klaim tanpa data pada kalimat (3)','Tambahkan jumlah sampel dan data pembanding pada kalimat (1)','Perbanyak majas agar menarik','Hilangkan sumber agar ringkas'],a:[0,1,2],e:'Revisi ilmiah: klaim dilunakkan sesuai bukti, bahasa dibakukan, data dilengkapi, sumber dipertahankan.'},
+{t:'dd',p:BP,q:'Klasifikasikan kalimat berikut ke dalam kategori yang tepat.',z:['Fakta berdata','Klaim tanpa dasar','Saran ilmiah'],it:['Rata-rata nilai literasi kelompok program 78 dan nonprogram 64 (Dinas Pendidikan, 2025).','Gue yakin sekolah lain pasti sukses meniru.','Perlu penelitian lanjutan dengan sampel lebih luas.','Program membaca pasti membuat semua siswa pintar.'],a:[0,1,2,1],e:'Fakta didukung data bersumber, klaim tanpa dasar bersifat spekulatif, saran ilmiah mengarah pada pengujian lanjutan.'}]}];
+const $=s=>document.querySelector(s),sh=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+let S={u:0,pts:0,done:{},z:0,i:0,ok:0,zp:0,st:null,ans:false,right:false};
+function at(q){
+if(q.t=='pg')return L[q.a]+'. '+q.o[q.a];
+if(q.t=='pgk')return q.a.map(i=>L[i]).join(', ');
+if(q.t=='tf')return q.a?'Benar':'Salah';
+if(q.t=='dd')return q.z.map((z,j)=>z+': '+q.it.filter((_,i)=>q.a[i]==j).join('; ')).join(' | ');
+if(q.t=='match')return q.l.map((l,i)=>l+' → '+q.r[i]).join(' | ');
+return q.it.map((x,i)=>(i+1)+') '+x).join(' ')}
+function tab(n){$('#game').classList.toggle('hide',n!=1);$('#guru').classList.toggle('hide',n!=2);$('#t1').classList.toggle('on',n==1);$('#t2').classList.toggle('on',n==2)}
+function show(id){['home','quiz','res'].forEach(x=>$('#'+x).classList.toggle('hide',x!=id));scrollTo(0,0)}
+function map(){
+$('#map').innerHTML=Z.map((z,k)=>{const lk=k>S.u,dn=S.done[k];return `<button class="node ${dn?'done':''} ${k==3?'boss':''}" onclick="info(${k})" ${lk?'disabled':''}><span class="ic">${lk?'🔒':z.ic}</span><b>${k==3?'Boss':'Zona '+(k+1)}: ${z.n}</b><small>${dn?'✔ '+z.rw:z.tema}</small></button>`}).join('');
+$('#pts').textContent=S.pts;$('#badges').textContent=Z.map((z,k)=>S.done[k]?z.bd:'▫️').join(' ')}
+function info(k){const z=Z[k],n=z.qs.length,box=$('#info');
+box.innerHTML=`<h3>${z.ic} ${z.n}</h3><p><b>Misi utama:</b> ${z.misi}</p><p><b>Imbalan:</b> ${z.bd} ${z.rw} + 10 poin per soal benar + 20 poin bonus.</p><p><b>Syarat lulus:</b> benar minimal ${Math.ceil(n*.6)} dari ${n} soal. Jenis soal: ${[...new Set(z.qs.map(q=>TN[q.t]))].join(', ')}.</p><button class="go" onclick="start(${k})">${k==3?'⚔️ Mulai Boss Battle':'🚀 Masuk Zona'}</button>`;
+box.classList.remove('hide');box.scrollIntoView({behavior:'smooth'})}
+function start(k){S.z=k;S.i=0;S.ok=0;S.zp=0;show('quiz');initQ()}
+function initQ(){const q=Z[S.z].qs[S.i];S.ans=false;
+if(q.t=='pg'||q.t=='tf')S.st=null;
+else if(q.t=='pgk')S.st=[];
+else if(q.t=='dd')S.st={pl:q.it.map(()=>-1),pick:null};
+else if(q.t=='match')S.st={m:q.l.map(()=>-1),ro:sh(q.r.map((_,i)=>i))};
+else{let o;do{o=sh(q.it.map((_,i)=>i))}while(o.every((v,i)=>v==i));S.st={o}}
+draw()}
+function draw(){
+const z=Z[S.z],q=z.qs[S.i],s=S.st,A=S.ans,last=S.i==z.qs.length-1;
+let h=`<div class="hd"><span>${z.ic} ${z.n} · Soal ${S.i+1}/${z.qs.length}</span><span>⭐ ${S.zp}</span></div>`;
+if(S.z==3)h+=`<div class="hp" title="Nyawa Boss"><i style="width:${(3-S.ok)/3*100}%"></i></div><small>👹 Si Plagiator Bayangan</small><br>`;
+h+=`<span class="tg">${TN[q.t]}</span>`;
+if(q.p)h+=`<blockquote>${q.p}</blockquote>`;
+h+=`<p class="q">${q.q}</p>`;
+if(q.t=='pg'||q.t=='pgk')h+=q.o.map((o,i)=>{const on=q.t=='pg'?s===i:s.includes(i);return `<button class="opt ${on?'on':''}" onclick="pk(${i})" ${A?'disabled':''}><b>${L[i]}.</b> ${o}</button>`}).join('');
+if(q.t=='tf')h+='<div class="row">'+[true,false].map(v=>`<button class="opt ${s===v?'on':''}" onclick="pk(${v})" ${A?'disabled':''}>${v?'✔ Benar':'✘ Salah'}</button>`).join('')+'</div>';
+if(q.t=='dd'){const ch=i=>`<span class="chip ${s.pick===i?'on':''}" draggable="true" ondragstart="event.dataTransfer.setData('t',${i})" onclick="event.stopPropagation();dc(${i})">${q.it[i]}</span>`;
+h+='<div class="pool">'+q.it.map((_,i)=>s.pl[i]<0?ch(i):'').join('')+'</div><div class="bks">'+q.z.map((zn,j)=>`<div class="bk" ondragover="event.preventDefault()" ondrop="dr(event,${j})" onclick="dp(${j})"><h4>${zn}</h4>${q.it.map((_,i)=>s.pl[i]==j?ch(i):'').join('')}</div>`).join('')+'</div>'}
+if(q.t=='match')h+=q.l.map((l,i)=>`<div class="mt"><span>${l}</span><select onchange="S.st.m[${i}]=+this.value" ${A?'disabled':''}><option value="-1">— pilih pasangan —</option>${s.ro.map(k=>`<option value="${k}" ${s.m[i]==k?'selected':''}>${q.r[k]}</option>`).join('')}</select></div>`).join('');
+if(q.t=='order')h+=s.o.map((k,p)=>`<div class="od"><span>${p+1}. ${q.it[k]}</span><span><button onclick="mv(${p},-1)" ${A||p==0?'disabled':''}>▲</button> <button onclick="mv(${p},1)" ${A||p==s.o.length-1?'disabled':''}>▼</button></span></div>`).join('');
+if(!A)h+='<button class="go" onclick="ck()">Periksa Jawaban</button>';
+else h+=`<div class="fb ${S.right?'ok':'bad'}"><b>${S.right?'Benar! +10 poin':'Belum tepat.'}</b><br>${q.e}${S.right?'':'<br><small><b>Jawaban benar:</b> '+at(q)+'</small>'}</div><button class="go" onclick="nx()">${last?'Lihat Hasil':'Lanjut ➜'}</button>`;
+$('#quiz').innerHTML=h}
+function pk(v){if(S.ans)return;const q=Z[S.z].qs[S.i];
+if(q.t=='pgk'){const k=S.st.indexOf(v);k<0?S.st.push(v):S.st.splice(k,1)}else S.st=v;draw()}
+function dc(i){if(S.ans)return;const s=S.st;if(s.pl[i]>=0){s.pl[i]=-1;s.pick=null}else s.pick=s.pick===i?null:i;draw()}
+function dp(j){if(S.ans)return;const s=S.st;if(s.pick!==null){s.pl[s.pick]=j;s.pick=null;draw()}}
+function dr(e,j){e.preventDefault();if(S.ans)return;S.st.pl[+e.dataTransfer.getData('t')]=j;S.st.pick=null;draw()}
+function mv(p,d){const o=S.st.o;[o[p],o[p+d]]=[o[p+d],o[p]];draw()}
+function ck(){const q=Z[S.z].qs[S.i],s=S.st;let r=false;
+if(q.t=='pg'||q.t=='tf'){if(s===null)return;r=s===q.a}
+else if(q.t=='pgk'){if(!s.length)return;r=[...s].sort().join()==q.a.join()}
+else if(q.t=='dd'){if(s.pl.includes(-1))return;r=s.pl.every((v,i)=>v==q.a[i])}
+else if(q.t=='match'){if(s.m.includes(-1))return;r=s.m.every((v,i)=>v==i)}
+else r=s.o.every((v,i)=>v==i);
+S.right=r;S.ans=true;if(r){S.ok++;S.zp+=10}draw()}
+function nx(){S.i++;S.i>=Z[S.z].qs.length?result():initQ()}
+function result(){
+const z=Z[S.z],n=z.qs.length,need=Math.ceil(n*.6),pass=S.ok>=need,k=S.z;let h;
+if(pass){if(!S.done[k]){S.done[k]=1;S.pts+=S.zp+20}S.u=Math.min(3,Math.max(S.u,k+1));
+h=`<div class="big">${z.bd}</div><h2 style="text-align:center">${k==3?'Boss Dikalahkan!':'Zona Selesai!'}</h2><p style="text-align:center">Benar ${S.ok} dari ${n}. Kamu meraih <b>${z.rw}</b>.</p>`;
+if(k==3){const p=S.pts,r=p>=180?'Cendekia Nusantara':p>=140?'Peneliti Muda':'Penulis Pemula';
+h+=`<p style="text-align:center;font-size:1.2rem">Naskah Emas kembali! Total <b>${p} poin</b> · Peringkat: <b>${r}</b> 🏆</p>`}}
+else h=`<div class="big">💪</div><h2 style="text-align:center">Belum Lulus</h2><p style="text-align:center">Benar ${S.ok} dari ${n}, minimal ${need} untuk lulus. Pelajari pembahasan lalu coba lagi!</p>`;
+h+=`<button class="go" onclick="${pass?'':`start(${k})`}${pass?'back()':''}">${pass?'🗺️ Kembali ke Peta':'🔁 Ulangi Zona'}</button>`+(pass?'':'<button class="go alt" onclick="back()">🗺️ Kembali ke Peta</button>');
+$('#res').innerHTML=h;show('res');map()}
+function back(){show('home');$('#info').classList.add('hide');map()}
+$('#key').innerHTML=Z.map((z,k)=>`<details><summary>${z.ic} ${k==3?'Boss':'Zona '+(k+1)}: ${z.n}</summary><ol>${z.qs.map(q=>`<li><i>[${TN[q.t]}]</i> ${q.q}<br><b>Kunci:</b> ${at(q)}<br><small>${q.e}</small></li>`).join('')}</ol></details>`).join('');
+map();
+</script></body></html>
